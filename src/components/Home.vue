@@ -1,4 +1,7 @@
 <template>
+  <div class="text-center">
+    <router-link to="/login" > Login</router-link>
+  </div>
   <h1>Welcome to page Home</h1>
   <div>
     <table class="table">

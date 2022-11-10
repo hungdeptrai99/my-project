@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <form @submit.prevent="onSubmit">
     <h1>Login</h1>
     <p :style="{ color: 'red' }" v-if="error.status">
       {{ error.text }}
@@ -27,13 +27,13 @@
         id="password"
       />
     </div>
-    <button class="btn btn-success" @click="onSubmit">Login</button>
-  </div>
+    <button class="btn btn-success" type="submit">Login</button>
+  </form>
 </template>
 
 <script>
 import axios from "axios";
-
+import { login } from "../api";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Login",
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     async onSubmit() {
-      if (this.form.userName.length < 6 || this.form.userName == "") {
+      if (this.form.userName.length < 6 || this.form.password.length < 6) {
         this.error = {
           text: "Bạn phải nhập hơn 6 kí tự",
           status: true,
@@ -68,7 +68,7 @@ export default {
       }
 
       let result = await axios.get(
-        `https://636a6a2ec07d8f936d9d24df.mockapi.io/APIlogin/user?username=${this.form.userName}&password=${this.form.password}`
+        login(this.form.userName, this.form.password)
       );
       if (result.status == 200 && result.data.length > 0) {
         if (

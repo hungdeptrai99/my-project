@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <router-link to="/login" > Login</router-link>
+    <router-link to="/login"> Login</router-link>
   </div>
   <h1>Welcome to page Home</h1>
   <div>
@@ -12,7 +12,7 @@
           <th class="font-weight-bold text-danger">PASSWORD</th>
         </tr>
       </thead>
-      <tBody v-for="(value, index) in data" :key="index">
+      <tBody v-for="(value, index) of data" :key="index">
         <tr>
           <th>
             {{ index + 1 }}
@@ -31,6 +31,7 @@
 
 <script>
 import axios from "axios";
+import { user } from "../api";
 export default {
   data() {
     return {
@@ -38,13 +39,11 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("https://636a6a2ec07d8f936d9d24df.mockapi.io/APIlogin/user")
-      .then((res) => {
-        if (res.data) {
-          this.data = res.data;
-        }
-      });
+    axios.get(user).then((res) => {
+      if (res.data) {
+        this.data = res.data;
+      }
+    });
   },
 };
 </script>

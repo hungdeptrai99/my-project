@@ -2,7 +2,7 @@
 
 <template>
   <div class="container">
-    <header>
+    <header style="text-align: center; color: red;">
       <img
         alt="Vue logo"
         class="logo"

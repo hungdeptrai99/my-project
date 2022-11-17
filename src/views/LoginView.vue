@@ -33,7 +33,7 @@
 
 <script>
 import axios from "axios";
-import { login } from "../api";
+import { loginAPI } from "../api";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Login",
@@ -66,10 +66,10 @@ export default {
           status: false,
         };
       }
-
       let result = await axios.get(
-        login(this.form.userName, this.form.password)
+        loginAPI(this.form.userName, this.form.password)
       );
+      console.log(result)
       if (result.status == 200 && result.data.length > 0) {
         if (
           result.data[0].username === this.form.userName &&
